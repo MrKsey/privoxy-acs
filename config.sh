@@ -99,7 +99,7 @@ sed -i "/^ADBLOCK_SOURCE=/{h;s|=.*|='${ADBLOCK_SOURCE}'|};\${x;/^$/{s||ADBLOCK_S
 sed -i "/^URLS=/{h;s|=.*|=${ADBLOCK_SOURCE}|};\${x;/^$/{s||URLS=${ADBLOCK_SOURCE}|;H};x}" $CONFIG_PATH/privoxy-blocklist.conf
 # Add support Adguard lists
 ADBLOCK_STR=\'^.*\\\[Adblock.*\\\].*$\'
-ADBLOCK_ADGUARD_STR=\'(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)\'
+ADBLOCK_ADGUARD_STR='(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)'
 sed -i "s/${ADBLOCK_STR}/'${ADBLOCK_ADGUARD_STR}'/" /usr/local/bin/privoxy-blocklist.sh
 # Add adblock or adguard lists
 if [ "$ADBLOCK_ENABLED" = "true" ]; then
@@ -111,7 +111,7 @@ fi
 # Save ENV VARS to file
 echo "$(date): Save ENV VARS to file"
 env | grep -v UPDATE_SCHEDULE | grep -v ADBLOCK_SOURCE | awk 'NF {sub("=","=\"",$0); print ""$0"\""}' > $CONFIG_PATH/.config.env && chmod 644 $CONFIG_PATH/.config.env
-echo ADBLOCK_SOURCE=$(echo $ADBLOCK_SOURCE | sed "s/(/'(/" | sed "s/)/)'/") >> $CONFIG_PATH/.config.env
+echo ADBLOCK_SOURCE=$(echo "$ADBLOCK_SOURCE" | sed "s/(/'(/" | sed "s/)/)'/") >> $CONFIG_PATH/.config.env
 
 echo " "
 echo "=================================================="
