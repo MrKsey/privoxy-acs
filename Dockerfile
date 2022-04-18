@@ -16,7 +16,7 @@ COPY update.sh /update.sh
 RUN export DEBIAN_FRONTEND=noninteractive \
 && chmod a+x /start.sh && chmod a+x /config.sh && chmod a+x /update.sh \
 && apt-get update && apt-get upgrade -y \
-&& apt-get install --no-install-recommends -y ca-certificates tzdata wget subversion cron dos2unix privoxy \
+&& apt-get install --no-install-recommends -y ca-certificates tzdata wget subversion cron dos2unix rsync privoxy \
 && mv $CONFIG_PATH/templates /usr/local/share/ \
 && dos2unix /start.sh && dos2unix /config.sh && dos2unix /update.sh \
 && wget --no-verbose --no-check-certificate --user-agent="$USER_AGENT" --output-document=/usr/local/bin/privoxy-blocklist.sh --tries=3 $ADBLOCK2PRIVOXY_SCRIPT \
