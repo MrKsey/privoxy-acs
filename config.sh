@@ -94,6 +94,11 @@ fi
 sed -i "/^ADBLOCK_ENABLED=/{h;s/=.*/=${ADBLOCK_ENABLED}/};\${x;/^$/{s//ADBLOCK_ENABLED=${ADBLOCK_ENABLED}/;H};x}" $CONFIG_PATH/config.ini
 sed -i "/^ADBLOCK_SOURCE=/{h;s|=.*|='${ADBLOCK_SOURCE}'|};\${x;/^$/{s||ADBLOCK_SOURCE='${ADBLOCK_SOURCE}'|;H};x}" $CONFIG_PATH/config.ini
 sed -i "/^URLS=/{h;s|=.*|=${ADBLOCK_SOURCE}|};\${x;/^$/{s||URLS=${ADBLOCK_SOURCE}|;H};x}" $CONFIG_PATH/privoxy-blocklist.conf
+if [ "$ADBLOCK_ENABLED" = "true" ]; then
+    privoxy-blocklist.sh -c $CONFIG_PATH/privoxy-blocklist.conf
+else
+    y | privoxy-blocklist.sh -c $CONFIG_PATH/privoxy-blocklist.conf -r
+fi
 
 # Save ENV VARS to file
 echo "$(date): Save ENV VARS to file"
