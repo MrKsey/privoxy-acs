@@ -97,7 +97,7 @@ sed -i "/^URLS=/{h;s|=.*|=${ADBLOCK_SOURCE}|};\${x;/^$/{s||URLS=${ADBLOCK_SOURCE
 if [ "$ADBLOCK_ENABLED" = "true" ]; then
     privoxy-blocklist.sh -c $CONFIG_PATH/privoxy-blocklist.conf
 else
-    y | privoxy-blocklist.sh -c $CONFIG_PATH/privoxy-blocklist.conf -r
+    yes | privoxy-blocklist.sh -c $CONFIG_PATH/privoxy-blocklist.conf -r
 fi
 
 # Save ENV VARS to file
