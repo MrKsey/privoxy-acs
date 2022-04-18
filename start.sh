@@ -7,8 +7,8 @@
 . /update.sh
 
 # Start privoxy
-/etc/init.d/privoxy start &
 tail -n 0 --retry --follow=name /var/log/privoxy/logfile &
+/etc/init.d/privoxy start &
 
 # endless work...
 tail -f /dev/null
