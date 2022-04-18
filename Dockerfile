@@ -12,7 +12,7 @@ ENV CONFIG_PATH="/etc/privoxy"
 RUN export DEBIAN_FRONTEND=noninteractive \
 && chmod a+x /start.sh && chmod a+x /config.sh && chmod a+x /update.sh \
 && apt-get update && apt-get upgrade -y \
-&& apt-get install --no-install-recommends -y ca-certificates tzdata curl wget subversion cron dos2unix privoxy \
+&& apt-get install --no-install-recommends -y ca-certificates tzdata wget subversion cron dos2unix privoxy \
 && mv -f $CONFIG_PATH/config $CONFIG_PATH/config.old.txt \
 && mv -f $CONFIG_PATH/user.action $CONFIG_PATH/user.action.old.txt \
 && dos2unix /start.sh && dos2unix /config.sh && dos2unix /update.sh \
