@@ -25,13 +25,11 @@ connection-sharing 0
 #admin-address privoxy-admin@example.com
 #proxy-info-url http://www.example.com/proxy-service.html
 
-actionsfile easylist.script.action
 actionsfile user.action
 actionsfile rkn.action
 actionsfile ru.action
 
 #filterfile default.filter
-filterfile easylist.script.filter
 #filterfile user.filter      # User customizations
 
 forward / .
