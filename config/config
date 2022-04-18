@@ -2,8 +2,8 @@
 listen-address :8118
 hostname privoxy
 
-confdir /etc/privoxy
-logdir /etc/privoxy
+confdir $CONFIG_PATH
+logdir $CONFIG_PATH/logs
 logfile logfile.log
 
 toggle  1
