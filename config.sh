@@ -89,16 +89,16 @@ fi
 # Adblock Plus list
 [ -z "$ADBLOCK_ENABLED" ] && export ADBLOCK_ENABLED=false
 [ "$ADBLOCK_ENABLED" != "true" ] && export ADBLOCK_ENABLED=false
-[ -z "$ADBLOCK_SOURCE" ] && export ADBLOCK_SOURCE==$(grep -s -E "^URLS" $CONFIG_PATH/privoxy-blocklist.conf | cut -d '=' -f 2)
+[ -z "$ADBLOCK_SOURCE" ] && export ADBLOCK_SOURCE=$(grep -s -E "^URLS" $CONFIG_PATH/privoxy-blocklist.conf | cut -d '=' -f 2)
 [ -z "$ADBLOCK_SOURCE" ] && export ADBLOCK_ENABLED=false
 sed -i "/^ADBLOCK_ENABLED=/{h;s/=.*/=${ADBLOCK_ENABLED}/};\${x;/^$/{s//ADBLOCK_ENABLED=${ADBLOCK_ENABLED}/;H};x}" $CONFIG_PATH/config.ini
-sed -i "/^ADBLOCK_SOURCE=/{h;s/=.*/=${ADBLOCK_SOURCE}/};\${x;/^$/{s//ADBLOCK_SOURCE=${ADBLOCK_SOURCE}/;H};x}" $CONFIG_PATH/config.ini
-sed -i "/^URLS=/{h;s/=.*/=${ADBLOCK_SOURCE}/};\${x;/^$/{s//URLS=${ADBLOCK_SOURCE}/;H};x}" $CONFIG_PATH/privoxy-blocklist.conf
-
+sed -i "/^ADBLOCK_SOURCE=/{h;s|=.*|='${ADBLOCK_SOURCE}'|};\${x;/^$/{s||ADBLOCK_SOURCE='${ADBLOCK_SOURCE}'|;H};x}" $CONFIG_PATH/config.ini
+sed -i "/^URLS=/{h;s|=.*|=${ADBLOCK_SOURCE}|};\${x;/^$/{s||URLS=${ADBLOCK_SOURCE}|;H};x}" $CONFIG_PATH/privoxy-blocklist.conf
 
 # Save ENV VARS to file
 echo "$(date): Save ENV VARS to file"
-env | grep -v UPDATE_SCHEDULE | awk 'NF {sub("=","=\"",$0); print ""$0"\""}' > $CONFIG_PATH/.config.env && chmod 644 $CONFIG_PATH/.config.env
+env | grep -v UPDATE_SCHEDULE | grep -v ADBLOCK_SOURCE | awk 'NF {sub("=","=\"",$0); print ""$0"\""}' > $CONFIG_PATH/.config.env && chmod 644 $CONFIG_PATH/.config.env
+echo ADBLOCK_SOURCE=$(echo $ADBLOCK_SOURCE | sed "s/(/'(/" | sed "s/)/)'/") >> $CONFIG_PATH/.config.env
 
 echo " "
 echo "=================================================="
