@@ -4,7 +4,6 @@
 
 FROM ubuntu:latest
 
-
 ENV GIT_URL="https://github.com/MrKsey/privoxy-acs"
 ENV ADBLOCK2PRIVOXY_SCRIPT="https://raw.githubusercontent.com/Andrwe/privoxy-blocklist/main/privoxy-blocklist.sh"
 ENV USER_AGENT="Mozilla/5.0 (X11; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0"
