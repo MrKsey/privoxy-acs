@@ -9,6 +9,10 @@ ENV ADBLOCK2PRIVOXY_SCRIPT="https://raw.githubusercontent.com/Andrwe/privoxy-blo
 ENV USER_AGENT="Mozilla/5.0 (X11; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0"
 ENV CONFIG_PATH="/etc/privoxy"
 
+COPY start.sh /start.sh
+COPY config.sh /config.sh
+COPY update.sh /update.sh
+
 RUN export DEBIAN_FRONTEND=noninteractive \
 && chmod a+x /start.sh && chmod a+x /config.sh && chmod a+x /update.sh \
 && apt-get update && apt-get upgrade -y \
