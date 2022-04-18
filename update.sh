@@ -14,9 +14,14 @@ fi
 if [ "$OS_UPDATE" = "true" ]; then
     echo "$(date): Start checking for OS updates ..."
     apt-get update && apt-get upgrade -y && apt-get purge -y -q --auto-remove
-    # Update ADBLOCK to PRIVOXY script
+    
+    # Update privoxy-blocklist.sh script
     wget --no-verbose --no-check-certificate --user-agent="$USER_AGENT" --output-document=/usr/local/bin/privoxy-blocklist.sh --tries=3 $ADBLOCK2PRIVOXY_SCRIPT
     chown -R root:root /usr/local/bin && chmod -R a+x /usr/local/bin
+    # Add support Adguard lists
+    ADBLOCK_STR=\'^.*\\\[Adblock.*\\\].*$\'
+    ADBLOCK_ADGUARD_STR=\'(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)\'
+    sed -i "s/${ADBLOCK_STR}/'${ADBLOCK_ADGUARD_STR}'/" /usr/local/bin/privoxy-blocklist.sh
     echo "$(date): Finished checking for OS updates."
 fi
 
