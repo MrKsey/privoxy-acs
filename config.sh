@@ -25,6 +25,8 @@ else
     tail -c1 $CONFIG_PATH/config.ini | read -r _ || echo >> $CONFIG_PATH/config.ini
 fi
 
+# Return templates folder
+cp -r -f /usr/local/share/templates $CONFIG_PATH/
 
 # Check vars, set defaults in config.ini ==========================
 echo "$(date): Check vars, set defaults..."
