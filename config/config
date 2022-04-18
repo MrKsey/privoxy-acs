@@ -30,15 +30,15 @@ actionsfile rkn.action
 actionsfile ru.action
 
 #filterfile default.filter
-#filterfile user.filter      # User customizations
+#filterfile user.filter
 
 forward / .
 forward 127.*.*.*/ .
 forward 192.168.*.*/ .
 forward 10.*.*.*/ .
 forward localhost/ .
-#forward-socks5t .i2p/ 127.0.0.1:4447 .		# Forward i2p traffic
-#forward-socks5t .onion/ 127.0.0.1:9050 .	# Forward tor traffic
+#forward-socks5t .i2p/ 127.0.0.1:4447 .     # Forward i2p traffic
+#forward-socks5t .onion/ 127.0.0.1:9050 .   # Forward tor traffic
 
 #debug     1 # Log the destination for each request. See also debug 1024.
 #debug     2 # show each connection status
