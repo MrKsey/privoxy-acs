@@ -26,7 +26,7 @@ else
 fi
 
 # Return templates folder
-cp -r -f /usr/local/share/templates $CONFIG_PATH/
+rsync -r -u /usr/local/share/templates $CONFIG_PATH/
 
 # Check vars, set defaults in config.ini ==========================
 echo "$(date): Check vars, set defaults..."
