@@ -15,6 +15,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 && apt-get update && apt-get upgrade -y \
 && apt-get install --no-install-recommends -y ca-certificates tzdata curl wget subversion cron dos2unix privoxy \
 && mv -f $CONFIG_PATH/config $CONFIG_PATH/config.old.txt \
+&& mv -f $CONFIG_PATH/user.action $CONFIG_PATH/user.action.old.txt \
 && dos2unix /start.sh && dos2unix /config.sh && dos2unix /update.sh \
 && wget --no-verbose --no-check-certificate --user-agent="$USER_AGENT" --output-document=/usr/local/bin/privoxy-blocklist.sh --tries=3 $ADBLOCK2PRIVOXY_SCRIPT \
 && chown -R root:root /usr/local/bin && chmod -R a+x /usr/local/bin \
