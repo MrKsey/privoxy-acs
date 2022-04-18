@@ -42,6 +42,9 @@ sed -i "/^listen-address /{h;s/ .*/ ${PRIVOXY_ADDRESS_PORT}/};\${x;/^$/{s//liste
 [ -z "$FORWARD_ADDRESS_PORT" ] && export FORWARD_ADDRESS_PORT=127.0.0.1:1843
 sed -i "/^FORWARD_ADDRESS_PORT=/{h;s/=.*/=${FORWARD_ADDRESS_PORT}/};\${x;/^$/{s//FORWARD_ADDRESS_PORT=${FORWARD_ADDRESS_PORT}/;H};x}" $CONFIG_PATH/config.ini
 
+# Update FORWARD_ADDRESS_PORT in user.action
+[ -s $CONFIG_PATH/user.action ] && sed -i -E "s/forward-socks5 [0-9\.:]+/forward-socks5 $FORWARD_ADDRESS_PORT/" $CONFIG_PATH/user.action
+
 #  OS_UPDATE
 [ -z "$OS_UPDATE" ] && export OS_UPDATE=true
 [ "$OS_UPDATE" != "true" ] && export OS_UPDATE=false
