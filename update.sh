@@ -20,7 +20,7 @@ if [ "$OS_UPDATE" = "true" ]; then
     chown -R root:root /usr/local/bin && chmod -R a+x /usr/local/bin
     # Add support Adguard lists
     ADBLOCK_STR=\'^.*\\\[Adblock.*\\\].*$\'
-    ADBLOCK_ADGUARD_STR=\'(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)\'
+    ADBLOCK_ADGUARD_STR='(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)'
     sed -i "s/${ADBLOCK_STR}/'${ADBLOCK_ADGUARD_STR}'/" /usr/local/bin/privoxy-blocklist.sh
     echo "$(date): Finished checking for OS updates."
 fi
