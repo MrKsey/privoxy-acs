@@ -8,7 +8,7 @@
 
 # Start privoxy
 /etc/init.d/privoxy start &
-tail --follow=name /var/log/privoxy/logfile &
+tail --retry --follow=name /var/log/privoxy/logfile &
 
 # endless work...
 tail -f /dev/null
