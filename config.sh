@@ -103,10 +103,7 @@ sed -i "/^URLS=/{h;s|=.*|=${ADBLOCK_SOURCE}|};\${x;/^$/{s||URLS=${ADBLOCK_SOURCE
 ADBLOCK_STR=\'^.*\\\[Adblock.*\\\].*$\'
 ADBLOCK_ADGUARD_STR='(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)'
 sed -i "s/${ADBLOCK_STR}/'${ADBLOCK_ADGUARD_STR}'/" /usr/local/bin/privoxy-blocklist.sh
-# Add adblock or adguard lists
-if [ "$ADBLOCK_ENABLED" = "true" ]; then
-    privoxy-blocklist.sh -c $CONFIG_PATH/privoxy-blocklist.conf
-else
+if [ "$ADBLOCK_ENABLED" = "false" ]; then
     yes | privoxy-blocklist.sh -c $CONFIG_PATH/privoxy-blocklist.conf -r
 fi
 
