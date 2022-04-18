@@ -18,5 +18,4 @@ Sock5 proxy. For example - ["ShadowSocks"](https://github.com/MrKsey/ss-tls-v2ra
 - connect host directory "/privoxy" to the container directory "/etc/privoxy" and start container:
 ```
 docker run --name privoxy-acs -d --restart=unless-stopped --net=host -v /privoxy:/etc/privoxy ksey/privoxy-acs
-
 ```
