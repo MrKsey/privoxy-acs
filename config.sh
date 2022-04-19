@@ -25,7 +25,7 @@ else
     tail -c1 $CONFIG_PATH/config.ini | read -r _ || echo >> $CONFIG_PATH/config.ini
 fi
 
-# Return templates folder
+# Revert templates folder
 rsync -r -u /usr/local/share/templates $CONFIG_PATH/
 
 # Check vars, set defaults in config.ini ==========================
@@ -36,6 +36,10 @@ echo "$(date): Check vars, set defaults..."
 [ -z "$PRIVOXY_ADDRESS_PORT" ] && export PRIVOXY_ADDRESS_PORT=:8118
 sed -i "/^PRIVOXY_ADDRESS_PORT=/{h;s/=.*/=${PRIVOXY_ADDRESS_PORT}/};\${x;/^$/{s//PRIVOXY_ADDRESS_PORT=${PRIVOXY_ADDRESS_PORT}/;H};x}" $CONFIG_PATH/config.ini
 sed -i "/^listen-address /{h;s/ .*/ ${PRIVOXY_ADDRESS_PORT}/};\${x;/^$/{s//listen-address ${PRIVOXY_ADDRESS_PORT}/;H};x}" $CONFIG_PATH/config
+
+# Set hostname in privoxy config file
+HOST_NAME=$(hostname)
+sed -i "/^hostname /{h;s/ .*/ ${HOST_NAME}/};\${x;/^$/{s//hostname ${HOST_NAME}/;H};x}" $CONFIG_PATH/config
 
 # FORWARD_ADDRESS_PORT
 [ -z "$FORWARD_ADDRESS_PORT" ] && export FORWARD_ADDRESS_PORT=$(grep -o -s -E "forward-socks5 [0-9\.:]+" $CONFIG_PATH/user.action | cut -d ' ' -f 2)
