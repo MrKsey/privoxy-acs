@@ -7,13 +7,14 @@ echo "=================================================="
 echo " "
 
 if [ -s $CONFIG_PATH/.config.env ]; then
-    set -a; . $CONFIG_PATH/.config.env; set +a
+    . $CONFIG_PATH/.config.env && export $(grep -E ^[a-zA-Z] $CONFIG_PATH/.config.env | cut -d= -f1)
 fi
 
 # Update OS
 if [ "$OS_UPDATE" = "true" ]; then
     echo "$(date): Start checking for OS updates ..."
-    apt-get update && apt-get upgrade -y && apt-get purge -y -q --auto-remove
+    apt-get update && apt-get upgrade -y
+    apt-get purge -y -q --auto-remove
     
     # Update privoxy-blocklist.sh script
     wget --no-verbose --no-check-certificate --user-agent="$USER_AGENT" --output-document=/usr/local/bin/privoxy-blocklist.sh --tries=3 $ADBLOCK2PRIVOXY_SCRIPT
