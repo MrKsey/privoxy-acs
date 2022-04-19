@@ -6,11 +6,11 @@ echo "$(date): config.sh started"
 echo "=================================================="
 echo " "
 
-# Download configuration files from github
-echo "$(date): Download configuration files from github"
-svn checkout $GIT_URL/trunk/config $CONFIG_PATH
-# chown -R root:root $CONFIG_PATH
-# chmod -R 644 $CONFIG_PATH
+if [ ! -s $CONFIG_PATH/config.ini ]; then
+    # Sync configuration files with github
+    echo "$(date): Download configuration files from github"
+    svn checkout $GIT_URL/trunk/config $CONFIG_PATH
+fi
 
 # Start load configs
 if [ -s $CONFIG_PATH/config.ini ]; then
