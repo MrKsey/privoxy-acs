@@ -6,8 +6,8 @@ echo "$(date): update.sh started"
 echo "=================================================="
 echo " "
 
-if [ -s $CONFIG_PATH/.config.env ]; then
-    . $CONFIG_PATH/.config.env && export $(grep -E ^[a-zA-Z] $CONFIG_PATH/.config.env | cut -d= -f1)
+if [ -s /etc/privoxy/.config.env ]; then
+    set -a; . /etc/privoxy/.config.env; set +a
 fi
 
 # Update OS
@@ -17,13 +17,14 @@ if [ "$OS_UPDATE" = "true" ]; then
     apt-get purge -y -q --auto-remove
     
     # Update privoxy-blocklist.sh script
+    echo "$(date): Updating privoxy-blocklist.sh script ..."
     wget --no-verbose --no-check-certificate --user-agent="$USER_AGENT" --output-document=/usr/local/bin/privoxy-blocklist.sh --tries=3 $ADBLOCK2PRIVOXY_SCRIPT
     chown -R root:root /usr/local/bin && chmod -R a+x /usr/local/bin
     # Add support Adguard lists
     ADBLOCK_STR=\'^.*\\\[Adblock.*\\\].*$\'
     ADBLOCK_ADGUARD_STR='(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)'
     sed -i "s/${ADBLOCK_STR}/'${ADBLOCK_ADGUARD_STR}'/" /usr/local/bin/privoxy-blocklist.sh
-    echo "$(date): Finished checking for OS updates."
+    echo "$(date): Finished checking for OS and privoxy-blocklist.sh script updates."
 fi
 
 mkdir -p /tmp/upd && cd /tmp/upd
