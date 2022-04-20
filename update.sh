@@ -21,9 +21,9 @@ if [ "$OS_UPDATE" = "true" ]; then
     wget --no-verbose --no-check-certificate --user-agent="$USER_AGENT" --output-document=/usr/local/bin/privoxy-blocklist.sh --tries=3 $ADBLOCK2PRIVOXY_SCRIPT
     chown -R root:root /usr/local/bin && chmod -R a+x /usr/local/bin
     # Add support Adguard lists
-    ADBLOCK_STR=\'^.*\\\[Adblock.*\\\].*$\'
-    ADBLOCK_ADGUARD_STR='(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)'
-    sed -i "s/${ADBLOCK_STR}/'${ADBLOCK_ADGUARD_STR}'/" /usr/local/bin/privoxy-blocklist.sh
+    # ADBLOCK_STR=\'^.*\\\[Adblock.*\\\].*$\'
+    # ADBLOCK_ADGUARD_STR='(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)'
+    # sed -i "s/${ADBLOCK_STR}/'${ADBLOCK_ADGUARD_STR}'/" /usr/local/bin/privoxy-blocklist.sh
     echo "$(date): Finished checking for OS and privoxy-blocklist.sh script updates."
 fi
 
