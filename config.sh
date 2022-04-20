@@ -105,9 +105,9 @@ sed -i "/^ADBLOCK_ENABLED=/{h;s/=.*/=${ADBLOCK_ENABLED}/};\${x;/^$/{s//ADBLOCK_E
 sed -i "/^ADBLOCK_SOURCE=/{h;s|=.*|='${ADBLOCK_SOURCE}'|};\${x;/^$/{s||ADBLOCK_SOURCE='${ADBLOCK_SOURCE}'|;H};x}" $CONFIG_PATH/config.ini
 sed -i "/^URLS=/{h;s|=.*|=${ADBLOCK_SOURCE}|};\${x;/^$/{s||URLS=${ADBLOCK_SOURCE}|;H};x}" $CONFIG_PATH/privoxy-blocklist.conf
 # Add support Adguard lists
-ADBLOCK_STR=\'^.*\\\[Adblock.*\\\].*$\'
-ADBLOCK_ADGUARD_STR='(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)'
-sed -i "s/${ADBLOCK_STR}/'${ADBLOCK_ADGUARD_STR}'/" /usr/local/bin/privoxy-blocklist.sh
+# ADBLOCK_STR=\'^.*\\\[Adblock.*\\\].*$\'
+# ADBLOCK_ADGUARD_STR='(^.*\\\[Adblock.*\\\].*$|AdGuard.+filter)'
+# sed -i "s/${ADBLOCK_STR}/'${ADBLOCK_ADGUARD_STR}'/" /usr/local/bin/privoxy-blocklist.sh
 if [ "$ADBLOCK_ENABLED" = "false" ]; then
     yes | privoxy-blocklist.sh -c $CONFIG_PATH/privoxy-blocklist.conf -r
 fi
