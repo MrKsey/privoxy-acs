@@ -1,6 +1,6 @@
 # Privoxy main configuration file
 listen-address :8118
-hostname privoxy
+hostname privoxy-acs
 
 confdir /etc/privoxy
 logdir /var/log/privoxy
