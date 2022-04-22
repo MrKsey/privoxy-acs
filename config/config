@@ -16,7 +16,7 @@ tolerate-pipelining 1
 accept-intercepted-requests 1
 allow-cgi-request-crunching 0
 split-large-forms 0
-socket-timeout 20
+socket-timeout 30
 connection-sharing 0
 
 #forwarded-connect-retries  1
