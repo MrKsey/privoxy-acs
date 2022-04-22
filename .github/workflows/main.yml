@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths-ignore:
       - '**/list/'
+      - '**/config/'
   pull_request:
     branches: [ main ]
   
